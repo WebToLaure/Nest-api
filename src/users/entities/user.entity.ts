@@ -9,17 +9,25 @@ export class User extends BaseEntity {
     id: number;
 
     @Column({
-        length: 50
+        length: 50,
+        nullable: false,
+        unique: true
     })
     username: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     email: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     password: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     adresse_line1: string;
 
     @Column()
@@ -27,17 +35,18 @@ export class User extends BaseEntity {
 
     @Column()
     adresse_line3: string;
-    @Column()
-    zipCode: string
-    @Column()
 
+    @Column({
+        nullable: false
+    })
+    zipCode: string
+    
+    @Column({
+        nullable: false
+    })
     city: string
 
-
-    @Column()
-    isAdmin: boolean;
-
-    @OneToMany(() => Offer, offer => offer.user)
+    @OneToMany(() => Offer, offer => offer.offerer) // offerer: celui qui propose l'offre
     offers: Offer[]
 
     @OneToMany(() => Reservation, reservations => reservations.user)

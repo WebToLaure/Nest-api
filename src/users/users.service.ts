@@ -15,8 +15,8 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-   async findOne(id: number) {
-    return await User.findOne ;
+   async findOne(username: string) {
+    return await User.findOne (username) ;
   } 
 
   update(id: number, updateUserDto: UpdateUserDto) {

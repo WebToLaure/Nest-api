@@ -1,11 +1,17 @@
+import { Reservation } from "src/reservations/entities/reservation.entity";
 import { User } from "src/users/entities/user.entity";
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-export class Offer extends BaseEntity{
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Timestamp } from "typeorm";
+
+
+@Entity()
+export class Offer extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({
+        nullable:false
+    })
     name: string;
 
     @Column({
@@ -16,9 +22,29 @@ export class Offer extends BaseEntity{
     })
     price: number;
 
-    @ManyToOne(() => User, (user) => user.offers, {onDelete:'CASCADE'})
-    user: User[]
+    @Column({
+        nullable:false
+    })
+    city: string;
 
+    @Column({
+        nullable:false
+    })
+    start_time: Timestamp;
+    @Column({
+        nullable:false
+    })
+    end_time: Timestamp;
 
+    @Column({
+        default:false
+    })
+    reserved: boolean
+
+    @ManyToOne(() => User, (user) => user.offers, { onDelete: 'CASCADE' })
+    offerer: User[]
+
+    @OneToOne(() => Reservation, (reservations => reservations.offer))
+    reservation : Reservation
 
 }
