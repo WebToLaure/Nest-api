@@ -1,6 +1,7 @@
+import { timestamp } from "rxjs";
 import { Reservation } from "src/reservations/entities/reservation.entity";
 import { User } from "src/users/entities/user.entity";
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Timestamp } from "typeorm";
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Timestamp, JoinColumn } from "typeorm";
 
 
 @Entity()
@@ -10,7 +11,7 @@ export class Offer extends BaseEntity {
     id: number;
 
     @Column({
-        nullable:false
+        nullable: false
     })
     name: string;
 
@@ -23,28 +24,29 @@ export class Offer extends BaseEntity {
     price: number;
 
     @Column({
-        nullable:false
+        nullable: false
     })
     city: string;
 
     @Column({
-        nullable:false
+        nullable: false
     })
     start_time: Date;
+
     @Column({
-        nullable:false
+        nullable: false
     })
     end_time: Date;
 
     @Column({
-        default:false
+        default: false
     })
     reserved: boolean
 
-    @ManyToOne(() => User, (user) => user.offers, { onDelete: 'CASCADE' })
-    offerer: User[]
+    @ManyToOne(() => User, (user) => user.offers, { cascade:["insert"], onDelete: 'CASCADE', eager: true })
+    user: User;
 
-    @OneToOne(() => Reservation, (reservations => reservations.offer))
-    reservation : Reservation
-
+    @OneToOne(() => Reservation, (reservation => reservation.offer))
+    reservation: Reservation;
+   
 }

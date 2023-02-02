@@ -21,7 +21,8 @@ export class User extends BaseEntity {
     email: string;
 
     @Column({
-        nullable: false
+        nullable: false,
+        unique: true
     })
     password: string;
 
@@ -40,15 +41,15 @@ export class User extends BaseEntity {
         nullable: false
     })
     zipCode: string
-    
+
     @Column({
         nullable: false
     })
     city: string
 
-    @OneToMany(() => Offer, offer => offer.offerer) // offerer: celui qui propose l'offre
+    @OneToMany(() => Offer, (offer) => offer.user) // Type:quel type de l'élément associé(Offer), pour chaque "offer"va me chercher la propriété offerer(dans offer)
     offers: Offer[]
 
-    @OneToMany(() => Reservation, reservations => reservations.user)
+    @OneToMany(() => Reservation, (reservation) => reservation.user, { eager: true })
     reservations: Reservation[]
 }

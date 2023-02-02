@@ -21,6 +21,8 @@ import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 import { OffersModule } from './offers/offers.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { Offer } from './offers/entities/offer.entity';
+import { Reservation } from './reservations/entities/reservation.entity';
 
 
 @Module({   // les imports servent à communiquer avec la database et les fichiers
@@ -34,7 +36,7 @@ import { ReservationsModule } from './reservations/reservations.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Ticket],
+      entities: [User, Offer, Reservation],
       synchronize: true,
       logging: false
     }),
