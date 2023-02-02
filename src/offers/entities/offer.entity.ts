@@ -30,11 +30,11 @@ export class Offer extends BaseEntity {
     @Column({
         nullable:false
     })
-    start_time: Timestamp;
+    start_time: Date;
     @Column({
         nullable:false
     })
-    end_time: Timestamp;
+    end_time: Date;
 
     @Column({
         default:false
