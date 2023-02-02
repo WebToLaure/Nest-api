@@ -8,22 +8,12 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
 
     return await User.create({...createUserDto }).save();
+  }
+
+  async findUserBy(username: string) {
+    return await User.findOneBy( {username} );
 
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
-   async findOne(username: string) {
-    return await User.findOne (username) ;
-  } 
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  
 }

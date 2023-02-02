@@ -13,7 +13,6 @@ export class UsersController {
 
     createUserDto.password = encodePassword (createUserDto.password)
     console.log("create",createUserDto);
-    
     return this.usersService.create(createUserDto);
   }
 

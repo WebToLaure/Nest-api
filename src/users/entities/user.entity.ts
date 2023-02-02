@@ -2,7 +2,7 @@ import { Offer } from "src/offers/entities/offer.entity";
 import { Reservation } from "src/reservations/entities/reservation.entity";
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
-@Entity()
+@Entity('users')
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
