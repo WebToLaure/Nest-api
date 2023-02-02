@@ -1,12 +1,18 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, ManyToOne, OneToOne } from "typeorm";
 import { User } from "src/users/entities/user.entity";
-export class Reservation extends BaseEntity{
+import { Offer } from "src/offers/entities/offer.entity";
 
+
+@Entity ()
+ export class  Reservation extends BaseEntity{
+ 
 @PrimaryGeneratedColumn()
 id : number;
 
 @ManyToOne(() => User, (user) => user.reservations, {onDelete:'CASCADE'})
 user: User[]
 
+@OneToOne(() => Offer, (offers => offers.reservation ))
+offer:Offer
 
 }
