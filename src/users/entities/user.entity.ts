@@ -29,12 +29,16 @@ export class User extends BaseEntity {
     @Column({
         nullable: false
     })
-    adresse_line1: string;
+    adresse: string;
 
-    @Column()
+    @Column({
+        nullable:true
+    })
     adresse_line2: string;
 
-    @Column()
+    @Column({
+        nullable:true
+    })
     adresse_line3: string;
 
     @Column({
