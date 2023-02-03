@@ -6,3 +6,5 @@ const salt = 10;
 export function encodePassword (password:string) {
     return bcrypt.hashSync (password, salt);
 }
+
+// peut-etre importe dans service 
