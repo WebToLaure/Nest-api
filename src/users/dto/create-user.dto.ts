@@ -12,11 +12,13 @@ export class CreateUserDto {
     @IsEmail()
     email: string;
 
-
     @IsString()
     @IsNotEmpty()
     password: string;
 
+    @IsString()
+    @IsNotEmpty()
+    passwordConfirm: string;
 
     @IsString()
     @IsNotEmpty()

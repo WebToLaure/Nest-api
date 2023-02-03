@@ -9,9 +9,13 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-
-    createUserDto.password = encodePassword (createUserDto.password)
+  async create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
+    
+    if (createUserDto.password!==createUserDto.passwordConfirm) {
+      return "apprends a ecrire"
+    }
+    createUserDto.password = await encodePassword (createUserDto.password)
     console.log("create",createUserDto);
     return this.usersService.create(createUserDto);
   }
