@@ -1,4 +1,4 @@
-import { IsNotEmpty,IsInt, IsDateString } from "class-validator";
+import { IsNotEmpty,IsDateString } from "class-validator";
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, } from "typeorm";
 
 export class CreateOfferDto {
@@ -18,8 +18,6 @@ export class CreateOfferDto {
     @IsDateString()
     end_time: Date;
 
-    @IsInt()
-    userId:number
 
 }
 

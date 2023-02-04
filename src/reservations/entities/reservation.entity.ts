@@ -9,11 +9,11 @@ export class Reservation extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User, (user) => user.reservations, { onDelete: 'CASCADE'})
+    @ManyToOne(() => User, (user) => user.reservations, { nullable: false, onDelete: 'CASCADE' })
     user: User;
 
 
-    @OneToOne(() => Offer, (offer) => offer.reservation, {nullable:false})
+    @OneToOne(() => Offer, (offer) => offer.reservation, { nullable: false })
     @JoinColumn()
     offer: Offer;
 

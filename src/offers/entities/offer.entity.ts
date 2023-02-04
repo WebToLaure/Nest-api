@@ -45,9 +45,9 @@ export class Offer extends BaseEntity {
     @Column({
         default: false
     })
-    reserved: boolean
+    reserved: boolean;
 
-    @ManyToOne(() => User, (user) => user.offers, { nullable:false, onDelete: 'CASCADE', eager: true })
+    @ManyToOne(() => User, (user) => user.offers, { nullable: false , onDelete: 'CASCADE', eager: true })
     user: User;
 
     @OneToOne(() => Reservation, (reservation) => reservation.offer)

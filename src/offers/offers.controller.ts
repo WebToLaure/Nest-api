@@ -3,10 +3,13 @@ import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { HttpException } from '@nestjs/common';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('offers')
 export class OffersController {
-  constructor(private readonly offersService: OffersService) {}
+  constructor(private readonly offersService: OffersService,
+  private readonly userService:UsersService){};
+
 
   @Post()
   createOffer(@Body() createOfferDto: CreateOfferDto) { // etre loggué pour créer une offer... pas fait
