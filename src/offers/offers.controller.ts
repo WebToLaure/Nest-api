@@ -1,19 +1,26 @@
-import { Controller, Get, Post, Body, Patch,Put, Param, Delete, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch,Put, Param, Delete, HttpStatus, UseGuards, Request } from '@nestjs/common';
 import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { HttpException } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UsersService } from 'src/users/users.service';
+import { User } from 'src/users/entities/user.entity';
 
 @Controller('offers')
 export class OffersController {
-  constructor(private readonly offersService: OffersService,
-  private readonly userService:UsersService){};
+  constructor(
+    private readonly offersService: OffersService,
+    private readonly usersService: UsersService
+    ) {}
 
-
+  @UseGuards(JwtAuthGuard)
   @Post()
-  createOffer(@Body() createOfferDto: CreateOfferDto) { // etre loggué pour créer une offer... pas fait
-    return this.offersService.createOffer(createOfferDto);
+  async createOffer(@Body() createOfferDto: CreateOfferDto,@Request() req) { // etre loggué pour créer une offer... pas fait
+    const user = await this.usersService.findUserById(req.user.userId);
+    
+    
+    return this.offersService.createOffer(createOfferDto, user);
   }
 
 

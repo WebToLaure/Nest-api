@@ -11,10 +11,13 @@ export class UsersService {
     return await User.create({...createUserDto }).save();
   }
 
-  async findUserBy(username: string) {
+  async findUserByName(username: string) {
     return await User.findOneBy( {username} );
 
   }
 
-  
+  async findUserById(id: number) {
+    return await User.findOneBy( {id} );
+
+  }
 }
