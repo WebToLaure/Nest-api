@@ -1,19 +1,24 @@
-import { IsString, IsBoolean, IsDecimal } from "class-validator";
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn,  } from "typeorm";
+import { IsNotEmpty,IsDateString } from "class-validator";
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, } from "typeorm";
 
 export class CreateOfferDto {
 
-    @IsString() // Décorateur importé de class-validator (comme boolean ou number) 
+    @IsNotEmpty() // Décorateur importé de class-validator (comme boolean ou number) 
     readonly name: string;
 
-    @IsDecimal()
+    @IsNotEmpty()
     readonly price: number;
 
-    @IsString()
-    readonly description: string;
+    @IsNotEmpty()
+    city: string;
 
-    @IsBoolean()
-    readonly isAvailable: false;
+    @IsDateString()
+    readonly start_time: Date;
+
+    @IsDateString()
+    readonly end_time: Date;
+
+
 }
 
 

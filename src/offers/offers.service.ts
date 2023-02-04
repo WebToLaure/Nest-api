@@ -1,26 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
+import { Offer } from './entities/offer.entity';
 
 @Injectable()
+
 export class OffersService {
-  create(createOfferDto: CreateOfferDto) {
-    return 'This action adds a new offer';
+/** 
+     * @method create :
+     * * Method avec requête SQL permettant de créer une nouevlle offre de service avec comme paramètre les instances "createOfferDto"
+     */
+
+  async createOffer(createOfferDto: CreateOfferDto) {
+    return await Offer.create({...createOfferDto }).save();
   }
 
-  findAll() {
+
+
+  findAllOffers() {
     return `This action returns all offers`;
   }
+
+
 
   findOne(id: number) {
     return `This action returns a #${id} offer`;
   }
 
+
+
   update(id: number, updateOfferDto: UpdateOfferDto) {
     return `This action updates a #${id} offer`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} offer`;
+
+  Isreserved(id:number, updateOfferDto:UpdateOfferDto){
+return `This action removes a #${id}fom offers`;
+
+  }
+
+
+
+  deleteOffer(id: number) {
+    return `This action delete a #${id} offer`;
   }
 }

@@ -1,7 +1,7 @@
 import { timestamp } from "rxjs";
 import { Reservation } from "src/reservations/entities/reservation.entity";
 import { User } from "src/users/entities/user.entity";
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Timestamp, JoinColumn } from "typeorm";
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Timestamp } from "typeorm";
 
 
 @Entity()
@@ -28,13 +28,17 @@ export class Offer extends BaseEntity {
     })
     city: string;
 
+
     @Column({
-        nullable: false
+        type: "timestamptz", // timestamp avec time zone UTC
+        nullable:false
     })
     start_time: Date;
 
     @Column({
+        type: "timestamptz",
         nullable: false
+
     })
     end_time: Date;
 
@@ -43,10 +47,10 @@ export class Offer extends BaseEntity {
     })
     reserved: boolean
 
-    @ManyToOne(() => User, (user) => user.offers, { cascade:["insert"], onDelete: 'CASCADE', eager: true })
+    @ManyToOne(() => User, (user) => user.offers, { onDelete: 'CASCADE', eager: true })
     user: User;
 
-    @OneToOne(() => Reservation, (reservation => reservation.offer))
+    @OneToOne(() => Reservation, (reservation) => reservation.offer)
     reservation: Reservation;
-   
+
 }
