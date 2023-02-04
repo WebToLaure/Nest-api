@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { userInfo } from 'os';
 import { User } from 'src/users/entities/user.entity';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
@@ -7,43 +8,38 @@ import { Offer } from './entities/offer.entity';
 @Injectable()
 
 export class OffersService {
-/** 
-     * @method create :
-     * * Method avec requête SQL permettant de créer une nouevlle offre de service avec comme paramètre les instances "createOfferDto"
-     */
+  /** 
+       * @method create :
+       * * Method avec requête SQL permettant de créer une nouevlle offre de service avec comme paramètre les instances "createOfferDto"
+       */
 
   async createOffer(createOfferDto: CreateOfferDto, user: User) {
     delete user.password;
-    return await Offer.create({...createOfferDto,user: user }).save();
+    delete user.reservations;
+    return await Offer.create({ ...createOfferDto, user: user }).save();
   }
 
 
+  async findAllOffers(): Promise<Offer[]> {
+    return await Offer.find();
+  }
 
-  findAllOffers() {
-    return `This action returns all offers`;
+  async findOfferById(id: number) {
+    return await Offer.findBy({ id });
   }
 
 
+  /* async findOfferByName(name: string) {
+    return await Offer.findBy({name});
+  }*/
 
-  findOne(id: number) {
-    return `This action returns a #${id} offer`;
-  }
-
-
-
-  update(id: number, updateOfferDto: UpdateOfferDto) {
-    return `This action updates a #${id} offer`;
-  }
-
-
-  Isreserved(id:number, updateOfferDto:UpdateOfferDto){
-return `This action removes a #${id}fom offers`;
-
-  }
+ /*  async update(id: number, updateOfferDto: UpdateOfferDto) {
+    return await Offer.create({ id, ...updateOfferDto}).save();
+  }  */
 
 
 
-  deleteOffer(id: number) {
-    return `This action delete a #${id} offer`;
+  async deleteOffer(id: number) {
+    return await Offer.delete({ id });
   }
 }
