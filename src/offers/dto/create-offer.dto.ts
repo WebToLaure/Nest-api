@@ -18,10 +18,10 @@ export class CreateOfferDto {
     @IsDateString()
     end_time: Date;
 
-    @IsInt()
-    userId:number
 
 }
+
+
 
 
 

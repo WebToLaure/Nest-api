@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from 'src/users/entities/user.entity';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { Offer } from './entities/offer.entity';
@@ -11,8 +12,9 @@ export class OffersService {
      * * Method avec requête SQL permettant de créer une nouevlle offre de service avec comme paramètre les instances "createOfferDto"
      */
 
-  async createOffer(createOfferDto: CreateOfferDto) {
-    return await Offer.create({...createOfferDto }).save();
+  async createOffer(createOfferDto: CreateOfferDto, user: User) {
+    delete user.password;
+    return await Offer.create({...createOfferDto,user: user }).save();
   }
 
 
