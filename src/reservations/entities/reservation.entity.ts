@@ -13,7 +13,7 @@ export class Reservation extends BaseEntity {
     user: User;
 
 
-    @OneToOne(() => Offer, (offer) => offer.reservation)
+    @OneToOne(() => Offer, (offer) => offer.reservation, {nullable:false})
     @JoinColumn()
     offer: Offer;
 
