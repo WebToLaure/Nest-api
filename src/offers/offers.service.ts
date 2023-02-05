@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { userInfo } from 'os';
 import { User } from 'src/users/entities/user.entity';
 import { Like } from 'typeorm';
 import { CreateOfferDto } from './dto/create-offer.dto';
