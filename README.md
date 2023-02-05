@@ -22,52 +22,149 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# PROJET Dépann'tout API
+## Development prototype Backend with TypeORM/POSTGRES/Nest.js :
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**API REST CRUD DEVELOPMENT:**
 
-## Installation
-
-```bash
-$ npm install
+```
+* npm
+* Node.js 
+* Express
+* PostgreSQL
+* Typescript
+* TypeORM
+* Nest.js
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+**DEPENDENCIES :**
+```
+* Nest.js
+* Typeorm           
+* Nodemon   
+* Bcrypt.js
+* Jsonwebtoken
+* Dotenv
+* Pg
+* Reflect-metadata
+* Class-validator
+* Class-transformer
+* Rxjs
+* Passport-jwt
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+**COMMANDS:**
+```
+  * git init
+  * npm init -y
+  * npm install express @types/express pg ts-node typeorm typescript
+  * npm i -g @nestjs/cli
+  * nest new project-name
+  * npm install --save @nestjs/typeorm typeorm pg
+  * npm i --save @nestjs/confi
+  * nest g resource
+  * npm i --save class-validator class-transformer
+  * npm install --save @nestjs/passport passport passport-local
+  * npm install --save-dev @types/passport-local
+  * npm install jsonwebtoken
+  * npm i bcrypt
+  * npm install --save @nestjs/jwt passport-jwt
+  * npm install --save-dev @types/passport-jwt
+  * 
 ```
 
-## Support
+> API dévelopée sur la base de 3 tables: User, Offer,Reservation.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Contexte de développement: Plateforme de réservations.
 
-## Stay in touch
+  * Proposer un service.
+  * Réserver un ou plusieurs services.
+  * Rechercher un service par mot clés sur le nom.
+  * Authentification gérée à l'aide de JWT.
+  
+ ``` 
+  * USER: INSCRIPTION : 
+     * un nom d'utilisateur
+     * un email
+     * un mot de passe
+     * une confirmation de mot de passe
+     * son adresse postale
+ ```
+ ```
+  * SERVICE(Offer):INFORMATIONS REQUISES:
+     * Le nom de l'utilisateur qui propose le service.
+     * Le nom du service proposé.
+     * Le tarif proposé.
+     * La ville.
+     * L'horaire de début et de fin.
+   ```
+      
+      
+ ## ROUTES
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Plateforme de test développement API utilisée : [Insomnia](https://insomnia.rest/download)  
 
-## License
+ * Serveur : http://localhost:3000/
 
-Nest is [MIT licensed](LICENSE).
+
+
+|  Verbe HTTP  |          Endpoint           |           Actions                   |  :warning:GET BY ID:sparkler:     |
+|--------------|-----------------------------|-------------------------------------|-----------------------------------|          
+|  GET         |     /offers/        (:id)   |    Liste les services               | (Ajouter `:id` pour lister par id)| 
+|  GET         |     /reservations/  (:id)   |    Liste les réservations           | (Ajouter `:id` pour lister par id)|
+|  GET         |     /offers/name            |    Liste le service par le nom      |                                   |
+|--------------|-----------------------------|-------------------------------------|-----------------------------------|
+|  POST        |     /users/                 |      Authentification client        |                                   | 
+|  POST        |     /users/                 |      Login client                   |                                   |
+|  POST        |     /offers/                |      Création service               |                                   |
+|  POST        |     /reservations/(:id)     |      Création réservation par id    |                                   |
+|              |                             |                                     |                                   |
+|--------------|-----------------------------|-------------------------------------|-----------------------------------|
+|              |                             |                                     |                                   |
+|  PUT         |     /offers/:id             |    Modifie le service par l'id      |                                   |
+|              |                             |                                     |                                   |
+|              |                             |                                     |                                   |
+|--------------|-----------------------------|-------------------------------------|-----------------------------------|
+|              |                             |                                     |                                   |
+|  DELETE      |     /offers/:id             |    Annule le service  par l'id      |                                   |
+|  DELETE      |     /reservations/:id       |    Annule la réservation par l'id   |                                   |
+|              |                             |                                     |                                   |
+|--------------|-----------------------------|-------------------------------------|-----------------------------------|
+
+
+##### INSERTION DANS BODY POUR ACCES REQUETE :
+
+```
+ REGISTER: 
+{
+	"username":"",
+	"email":"",
+	"password":"",
+	"passwordConfirm":"",
+	"adresse": "",
+	"zipCode":"",
+	"city":""
+}
+```
+```
+LOGIN:
+{
+	"username":"",
+	"password":""
+}
+```
+```
+CREATE OFFER:
+{
+	"name":"",
+	"price":number,
+	"city":"",
+	"start_time":"2023-02-06 08:00:00+01",
+	"end_time":"2023-02-06 16:00:00+01"
+}
+```
+```
+RESERVATION PAR LE NOM DANS PARAMS
+```
+
