@@ -12,9 +12,9 @@ export class ReservationsService {
   return await Reservation.create({ user: user, offer: offer }).save();
   }
 
-  findOne(id: number) {
+ /*  findOne(id: number) {
     return `This action returns a #${id} reservation`;
-  }
+  } */
 
   async deleteReservation(id: number) {
     return await Reservation.delete({ id });

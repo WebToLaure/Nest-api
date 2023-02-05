@@ -33,6 +33,7 @@ export class ReservationsController {
     return this.reservationsService.findOne(+id);
   }
 
+
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteReservation(@Param('id', ParseIntPipe) id: number) {
