@@ -1,12 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Put, Param, Delete, HttpStatus, UseGuards, Request, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Put, Param, Delete, HttpStatus, UseGuards, Request, ParseIntPipe, HttpException } from '@nestjs/common';
 import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
-import { HttpException } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UsersService } from 'src/users/users.service';
-import { User } from 'src/users/entities/user.entity';
-import { Offer } from './entities/offer.entity';
+
 
 @Controller('offers')
 export class OffersController {

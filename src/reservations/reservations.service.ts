@@ -20,7 +20,7 @@ export class ReservationsService {
     return reservation;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+  async deleteReservation(id: number) {
+    return await Reservation.delete({ id });
   }
 }
