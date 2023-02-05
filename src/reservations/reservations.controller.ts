@@ -38,6 +38,15 @@ export class ReservationsController {
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteReservation(@Param('id', ParseIntPipe) id: number) {
-    return await this.reservationsService.deleteReservation(id);
+    const resa = await this.reservationsService.findOne(id)
+    if (resa) {
+      resa.offer.reserved= false;
+      resa.offer.save();
+      if (await this.reservationsService.deleteReservation(id)) {
+        throw new HttpException("reservation supprimée", HttpStatus.ACCEPTED);
+      }
+      throw new HttpException("suppression impossible", HttpStatus.BAD_REQUEST);
+    }
+    throw new HttpException("reservation introuvable", HttpStatus.NOT_FOUND);
   }
 }

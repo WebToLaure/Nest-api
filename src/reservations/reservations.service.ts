@@ -21,6 +21,6 @@ export class ReservationsService {
   }
 
   async deleteReservation(id: number) {
-    return await Reservation.delete({ id });
+    return (await Reservation.delete({ id })).affected;
   }
 }
