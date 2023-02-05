@@ -44,14 +44,18 @@ export class OffersController {
   }
 
 
-/* @UseGuards(JwtAuthGuard)
-@Patch(':id')
+@UseGuards(JwtAuthGuard)
+@Put(':id')
 async update(@Param('id', ParseIntPipe) id: number, @Body() updateOfferDto: UpdateOfferDto) {
-  if (!id) {
-  throw new HttpException("l'offre de service n'existe pas", HttpStatus.BAD_REQUEST);
+
+  /* if (!id) {
+    throw new HttpException("l'offre de service n'existe pas", HttpStatus.BAD_REQUEST);
+    }*/
+  if (await this.offersService.findOfferById(id)) {
+    return await this.offersService.update(id, updateOfferDto);
   }
-  return await this.offersService.update(+id, updateOfferDto);
-} */
+  return
+}
   
 
 

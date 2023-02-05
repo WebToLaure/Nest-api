@@ -33,9 +33,15 @@ export class OffersService {
     return await Offer.findBy({name: Like(`%${name}%`)});
   }
 
- /*  async update(id: number, updateOfferDto: UpdateOfferDto) {
-    return await Offer.create({ id, ...updateOfferDto}).save();
-  }  */
+  async update(id: number, updateOfferDto: UpdateOfferDto) {
+    const offer = await Offer.findOneBy({ id });
+    if (updateOfferDto.name) offer.name = updateOfferDto.name;
+    if (updateOfferDto.price) offer.price = updateOfferDto.price;
+    if (updateOfferDto.city) offer.city = updateOfferDto.city;
+    if (updateOfferDto.start_time) offer.start_time = updateOfferDto.start_time;
+    if (updateOfferDto.end_time) offer.end_time = updateOfferDto.end_time;
+    return await offer.save()
+  }
 
 
 
