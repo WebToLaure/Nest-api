@@ -26,7 +26,7 @@ export class OffersController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAllOffers(@Body() offer: Offer) {
+  async findAllOffers() {
     return await this.offersService.findAllOffers();
   }
 
@@ -37,11 +37,11 @@ export class OffersController {
   }
 
 
-  /* @UseGuards(JwtAuthGuard)
-  @Get(':name')
+  @UseGuards(JwtAuthGuard)
+  @Get('/name/:name')
   async findOfferByName(@Param('name') name:string){
     return await this.offersService.findOfferByName(name);
-  } */
+  }
 
 
 /* @UseGuards(JwtAuthGuard)
