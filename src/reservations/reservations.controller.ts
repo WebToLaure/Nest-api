@@ -1,4 +1,4 @@
-import { Controller, Get, Post,Request, Body, Patch, Param, Delete, HttpException, HttpStatus, UseGuards, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body, Patch, Param, Delete, HttpException, HttpStatus, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
@@ -12,16 +12,16 @@ export class ReservationsController {
     private readonly reservationsService: ReservationsService,
     private readonly offersService: OffersService,
     private readonly usersService: UsersService
-    ) {}
+  ) { }
 
   @UseGuards(JwtAuthGuard)
   @Post(':id')
   async create(@Param('id', ParseIntPipe) id: number, @Request() req) {
     const offer = await this.offersService.findOfferById(id);
-    if(!offer){
+    if (!offer) {
       throw new HttpException("l'offre de service n'existe pas", HttpStatus.NOT_FOUND);
     }
-    if(offer.reserved){
+    if (offer.reserved) {
       throw new HttpException("l'offre est deja reservée", HttpStatus.FORBIDDEN);
     }
     const user = await this.usersService.findUserById(req.user.userId);
@@ -39,14 +39,15 @@ export class ReservationsController {
   @Delete(':id')
   async deleteReservation(@Param('id', ParseIntPipe) id: number) {
     const resa = await this.reservationsService.findOne(id)
-    if (resa) {
-      resa.offer.reserved= false;
-      resa.offer.save();
-      if (await this.reservationsService.deleteReservation(id)) {
-        throw new HttpException("reservation supprimée", HttpStatus.ACCEPTED);
-      }
-      throw new HttpException("suppression impossible", HttpStatus.BAD_REQUEST);
+    if (resa.length === 0) {
+      throw new HttpException("reservation introuvable", HttpStatus.NOT_FOUND);
     }
-    throw new HttpException("reservation introuvable", HttpStatus.NOT_FOUND);
+    resa[0].offer.reserved = false;
+    await resa[0].offer.save();
+    if (await this.reservationsService.deleteReservation(id)) {
+      throw new HttpException("reservation supprimée", HttpStatus.ACCEPTED);
+    }
+    throw new HttpException("suppression impossible", HttpStatus.BAD_REQUEST);
   }
+
 }

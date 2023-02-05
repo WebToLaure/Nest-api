@@ -13,7 +13,7 @@ export class ReservationsService {
   }
 
   async findOne(id: number) {
-    const reservation = await Reservation.findOneBy({ id })
+    const reservation = await Reservation.find({relations:{offer:true},where: {id: id} })
     if (!reservation) {
       return undefined;
     }
