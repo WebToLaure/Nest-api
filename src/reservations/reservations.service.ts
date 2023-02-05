@@ -9,11 +9,15 @@ export class ReservationsService {
   async create(user: User, offer: Offer) {
     offer.reserved = true;
     offer.save();
-  return await Reservation.create({ user: user, offer: offer }).save();
+    return await Reservation.create({ user: user, offer: offer }).save();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
+  async findOne(id: number) {
+    const reservation = await Reservation.findOneBy({ id })
+    if (!reservation) {
+      return undefined;
+    }
+    return reservation;
   }
 
   remove(id: number) {

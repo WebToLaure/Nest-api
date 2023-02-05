@@ -28,13 +28,14 @@ export class ReservationsController {
     return this.reservationsService.create(user, offer);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservationsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.reservationsService.findOne(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservationsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.reservationsService.remove(id);
   }
 }
