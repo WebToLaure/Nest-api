@@ -28,11 +28,11 @@ export class ReservationsController {
     return this.reservationsService.create(user, offer);
   }
 
-  @Get(':id')
+ /*  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reservationsService.findOne(+id);
   }
-
+ */
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
