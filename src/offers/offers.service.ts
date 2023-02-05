@@ -20,16 +20,24 @@ export class OffersService {
 
 
   async findAllOffers(): Promise<Offer[]> {
-    return await Offer.find();
+    return await Offer.find({relations: { user: {reservations: false}}, select: {user: {username: true, password: false}}});
   }
 
   async findOfferById(id: number) {
-    return await Offer.findOneBy({ id });
+    const offer = await Offer.findOneBy({ id })
+    if(!offer){
+      return undefined;
+    }
+    return offer;
   }
 
 
   async findOfferByName(name: string) {
-    return await Offer.findBy({name: Like(`%${name}%`)});
+    const offer = await Offer.findBy({name: Like(`%${name}%`)});
+    if (offer.length === 0) {
+      return undefined
+    }
+    return offer
   }
 
   async update(id: number, updateOfferDto: UpdateOfferDto) {
@@ -45,6 +53,6 @@ export class OffersService {
 
 
   async deleteOffer(id: number) {
-    return await Offer.delete({ id });
+    return (await Offer.delete({ id })).affected;
   }
 }

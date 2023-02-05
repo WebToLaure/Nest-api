@@ -47,10 +47,10 @@ export class Offer extends BaseEntity {
     })
     reserved: boolean;
 
-    @ManyToOne(() => User, (user) => user.offers, { onDelete: 'CASCADE', eager: true })
+    @ManyToOne(() => User, (user) => user.offers, { onDelete: 'CASCADE'})
     user: User;
 
-    @OneToOne(() => Reservation, (reservation) => reservation.offer)
+    @OneToOne(() => Reservation, (reservation) => reservation.offer )
     reservation: Reservation;
 
 }
